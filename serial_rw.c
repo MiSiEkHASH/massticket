@@ -75,7 +75,7 @@ int main(int argc, char *argv[])
         }
         else if (strcmp(argv[argn], "/comport") == 0)
         {
-            // Parse device number. SerialSend actually just
+            // Parse device number. serial_rw actually just
             // begins searching at this number and continues
             // working down to zero.
             if (++argn < argc)
@@ -91,7 +91,7 @@ int main(int argc, char *argv[])
         else if (strcmp(argv[argn], "/closedelay") == 0)
         {
             // Parse close delay duration. After transmitting
-            // the specified text, SerialSend will delay by
+            // the specified text, serial_rw will delay by
             // this number of milliseconds before closing the
             // COM port. Some devices seem to require this.
             if (++argn < argc)
