@@ -1,5 +1,6 @@
 @rem testowy drukarki custom vkp80ii, pomiety jest tu proces incjalizacji ustawiani tesktu itp. 
 @echo off
+
 :start
 @rem wartosc poczatkow licznika aktualnie drukowych biletow 
 set /a counter=0
@@ -21,6 +22,7 @@ echo Wybrano drukowanie: %ticketNoDec% biletow, prosze czekac...
 timeout 3 >nul
 echo.
 echo.
+
 :PrintTicket
 cls
 @rem gdy wydrukuje wszystkie znaki przechodzi do podsumowania - info koncowego
@@ -44,6 +46,7 @@ echo.
 echo Odbierz bilet!
 @rem opoznienie przed sprawdzeniem stanu podajnika biletow
 timeout 3 >nul
+
 :WaitForRemoveTicket
 @rem sprawdza stan podajnika, w odpowiedzi to 3 bajt (cale info w datasheet drukarki), w skrócie  0x44 (brak biletu w podajniku), 0x64 podajnik zajęty - do tak w duzym skrócie bo ten bajt trzeba
 @rem sobie do skonwertować do postaci binarnej i tam na innych bitach są inne statusy, tu zrobione na pałe sugerujac sie defaultowymi usawieniami  
@@ -52,15 +55,16 @@ for /F "delims=" %%A in ('serial_rw.exe /comport 2 /baudrate 19200 /dtr_off /clo
 if "%anwser%"=="100F44008000" goto PrintTicket
 @rem jezli podajnik zajety, tj. poprzedni bilet nie zostal wyciahgniety, pokaze info aby odebrc najpierw poprzed bilet, po 5 sekunach sprawdza ponownie i tak w kolko poki podajnik sie nie zwoli 
 if "%anwser%"=="100F64008000" (
-cls
-echo.
-echo Najpierw odbierz poprzedni bilet
-echo.
-timeout 5 >nul
-goto WaitForRemoveTicket
+	cls
+	echo.
+	echo Najpierw odbierz poprzedni bilet
+	echo.
+	timeout 5 >nul
+	goto WaitForRemoveTicket
 )
 pause
 echo.
+
 :done
 cls
 echo.
