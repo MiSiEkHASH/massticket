@@ -1,4 +1,5 @@
-// last mod. 10.05.2022
+// created by M.Świdziński, 10/2021
+// last mod. 10.05.2022, build 26
 // serial_rw.c - This program sends and read text via serial port
 // Parameters:
 // - /baudrate [value] - serial port speed
